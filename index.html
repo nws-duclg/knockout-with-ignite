@@ -22,8 +22,51 @@
     <script src="./igniteui/js/infragistics.core.js"></script>
     <script src="./igniteui/js/infragistics.dv.js"></script>
     <script src="./igniteui/js/infragistics.lob.js"></script>
+
+    <!-- data -->
+    <script src="https://igniteui.github.io/help-samples/data-files/adventureworks.min.js"></script>
     <script>
         // TODO script go here
+
+        $("#grid").igGrid({
+            autoGenerateColumns: false,
+            width: "100%",
+            columns: [{
+                    headerText: "Product ID",
+                    key: "ProductID",
+                    dataType: "number",
+                    width: "15%"
+                },
+                {
+                    headerText: "Product Name",
+                    key: "Name",
+                    dataType: "string",
+                    width: "40%"
+                },
+                {
+                    headerText: "Product Number",
+                    key: "ProductNumber",
+                    dataType: "string",
+                    width: "30%"
+                },
+                {
+                    headerText: "Make Flag",
+                    key: "MakeFlag",
+                    dataType: "bool",
+                    width: "15%"
+                }
+            ],
+            dataSource: adventureWorks,
+            features: [{
+                    name: 'Paging',
+                    type: "local",
+                    pageSize: 10
+                },
+                {
+                    name: "Filtering"
+                }
+            ]
+        });
     </script>
 </body>
 
