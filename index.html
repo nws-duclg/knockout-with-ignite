@@ -13,35 +13,7 @@
 
 <body>
 
-    <table id="grid" data-bind="igGrid: {
-        width: '100%',
-        autoGenerateColumns: false,
-        renderCheckboxes: true,
-        dataSource: items,
-        primaryKey: 'ProductID',
-        height : '300px',
-        columns: [
-            {headerText: 'ProductID', key: 'ProductID', dataType: 'string', width: '25%'},
-            {headerText: 'Name', key: 'Name', dataType: 'string', width: '25%'},
-            {headerText: 'ProductNumber', key: 'ProductNumber', dataType: 'string', width: '25%'},
-            {headerText: 'MakeFlag', key: 'MakeFlag', dataType: 'string', width: '25%'},
-        ],
-        features: [{
-                name: 'Updating',
-                enableAddRow: false,
-                enableDeleteRow: false,
-                editMode: 'none'
-            },
-            {
-                name: 'Paging',
-                type: 'local',
-                pageSize: 50
-            },
-            {
-                name: 'Filtering'
-            }
-        ]}">
-    </table>
+    <table id="grid"></table>
 
     <!-- jQuery -->
     <script src="./js/jquery.min.js"></script>
@@ -51,7 +23,7 @@
     <script src="./igniteui/js/infragistics.core.js"></script>
     <script src="./igniteui/js/infragistics.dv.js"></script>
     <script src="./igniteui/js/infragistics.lob.js"></script>
-    
+
     <!-- knockout -->
     <script src="./js/knockout.js"></script>
 
@@ -63,15 +35,39 @@
     <!-- data -->
     <script src="https://igniteui.github.io/help-samples/data-files/adventureworks.min.js"></script>
     <script>
-        $(function(){
-            var viewModel = function() {
-                const self = this;
-                self.items = ko.observableArray([...adventureWorks]);
+        $(function () {
+            const columns = [{
+                    headerText: "Product ID",
+                    key: "ProductID",
+                    dataType: "number"
+                },
+                {
+                    headerText: "Product Name",
+                    key: "Name",
+                    dataType: "string"
+                },
+                {
+                    headerText: "Product Number",
+                    key: "ProductNumber",
+                    dataType: "string"
+                }
+            ];
 
-            }
-
-            ko.applyBindings(viewModel);
-        })
+            $("#grid").igGrid({
+                width: "500px",
+                height: "600px",
+                columns: columns,
+                primaryKey : "ProductID",
+                dataSource: adventureWorks,
+                features: [
+                    {
+                        name: 'Paging',
+                        type: 'local',
+                        pageSize: 13
+                    }
+                ]
+            });
+        });
     </script>
 </body>
 
