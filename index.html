@@ -42,28 +42,49 @@
                     dataType: "number"
                 },
                 {
-                    headerText: "Product Name",
-                    key: "Name",
-                    dataType: "string"
-                },
-                {
-                    headerText: "Product Number",
-                    key: "ProductNumber",
-                    dataType: "string"
+                    headerText: "Prouduct Data",
+                    key: "ProductData",
+                    group: [
+                        {
+                            headerText: "Product Name",
+                            key: "Name",
+                            dataType: "string"
+                        },
+                        {
+                            headerText: "Product Number",
+                            key: "ProductNumber",
+                            dataType: "string"
+                        }
+                    ]
                 }
             ];
 
             $("#grid").igGrid({
-                width: "500px",
+                width: "600px",
                 height: "600px",
                 columns: columns,
                 primaryKey : "ProductID",
                 dataSource: adventureWorks,
                 features: [
                     {
-                        name: 'Paging',
-                        type: 'local',
+                        name: "Paging",
+                        type: "local",
                         pageSize: 13
+                    },
+                    {
+                        name: "Filtering"
+                    },
+                    {
+                        name: "RowSelectors"
+                    },
+                    {
+                        name: "Selection"
+                    },
+                    {
+                        name: "Updating"
+                    }, 
+                    {
+                        name: "MultiColumnHeaders"
                     }
                 ]
             });
