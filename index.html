@@ -54,6 +54,7 @@
         ];
 
         $("#grid").igGrid({
+            primaryKey: "ProductID",
             autoGenerateColumns: false,
             width: "100%",
             caption: "Sales Data",
@@ -73,10 +74,28 @@
 
                 },
                 {
-                    name: "RowSelectors"
+                    name: "RowSelectors",
+                    enableRowNumbering: false,
+                    enableCheckBoxes: true,
+                    enableSelectAllForPaging: true,
+                    deselectAllForPagingTemplate: "<div class='ui-widget-header ui-priority-secondary' tabindex='0'><div><a href='#' tabindex='0' data-rs-deselect-all>Deselect all ${totalRecordsCount} records</a><div style='float:right;'><span data-rs-close-all class='ui-icon-close ui-icon ui-button' tabindex='0'></div></span></div></div>"
                 },
                 {
-                    name: "Selection"
+                    name: "Selection",
+                    multipleSelection: true
+                },
+                {
+                    name: "Updating",
+                    enableAddRow: true,
+                    editMode: "row",
+                    enableDeleteRow: true,
+                    columnSettings: [{
+                        columnKey: "ProductID",
+                        editorOptions: {
+                            type: "numeric",
+                            disabled: true
+                        }
+                    }, ]
                 }
             ]
         });
