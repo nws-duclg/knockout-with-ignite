@@ -27,35 +27,37 @@
     <script src="https://igniteui.github.io/help-samples/data-files/adventureworks.min.js"></script>
     <script>
         // TODO script go here
+        const columns = [{
+                headerText: "Product ID",
+                key: "ProductID",
+                dataType: "number",
+                width: "15%"
+            },
+            {
+                headerText: "Product Name",
+                key: "Name",
+                dataType: "string",
+                width: "40%"
+            },
+            {
+                headerText: "Product Number",
+                key: "ProductNumber",
+                dataType: "string",
+                width: "30%"
+            },
+            {
+                headerText: "Make Flag",
+                key: "MakeFlag",
+                dataType: "bool",
+                width: "15%"
+            }
+        ];
 
         $("#grid").igGrid({
             autoGenerateColumns: false,
             width: "100%",
-            columns: [{
-                    headerText: "Product ID",
-                    key: "ProductID",
-                    dataType: "number",
-                    width: "15%"
-                },
-                {
-                    headerText: "Product Name",
-                    key: "Name",
-                    dataType: "string",
-                    width: "40%"
-                },
-                {
-                    headerText: "Product Number",
-                    key: "ProductNumber",
-                    dataType: "string",
-                    width: "30%"
-                },
-                {
-                    headerText: "Make Flag",
-                    key: "MakeFlag",
-                    dataType: "bool",
-                    width: "15%"
-                }
-            ],
+            caption: "Sales Data",
+            columns: columns,
             dataSource: adventureWorks,
             features: [{
                     name: 'Paging',
@@ -63,9 +65,54 @@
                     pageSize: 10
                 },
                 {
-                    name: "Filtering"
+                    name: "Filtering",
+                    filterButtonLocation: "left",
+                    caseSensitive: false,
+                    type: "local", // "local" and "remote"
+                    filterDropDownItemIcons: true
+
+                },
+                {
+                    name: "RowSelectors"
+                },
+                {
+                    name: "Selection"
                 }
             ]
+        });
+
+        //cellClick
+        $("#grid").igGrid({
+            cellClick: function (evt, ui) {
+                console.log("cellClick");
+                const grid = $("#grid").igGrid("widget");
+                console.log(grid);
+
+                const count = $("#grid").igGrid("totalRecordsCount");
+                console.log(count);
+
+            },
+            cellRightClick: function (evt, ui) {
+                console.log("cellRightClick");
+            },
+            dataBinding: function (evt, ui) {
+                console.log("dataBinding");
+            },
+            dataBound: function (evt, ui) {
+                console.log("dataBound");
+            },
+            dataRendering: function (evt, ui) {
+                console.log("dataRendering");
+            },
+            dataRendered: function (evt, ui) {
+                console.log("dataRendered");
+            },
+            rowsRendered: function (evt, ui) {
+                console.log("rowsRendered");
+            },
+            rendering: function (evt, ui) {
+                console.log("rendering");
+            },
         });
     </script>
 </body>
