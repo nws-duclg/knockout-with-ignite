@@ -15,32 +15,14 @@
 
     <table id="grid" data-bind="igGrid: {
         width: '100%',
+        height : '600px',
         autoGenerateColumns: false,
-        renderCheckboxes: true,
         dataSource: items,
+        autoCommit: true,
         primaryKey: 'ProductID',
-        height : '300px',
-        columns: [
-            {headerText: 'ProductID', key: 'ProductID', dataType: 'string', width: '25%'},
-            {headerText: 'Name', key: 'Name', dataType: 'string', width: '25%'},
-            {headerText: 'ProductNumber', key: 'ProductNumber', dataType: 'string', width: '25%'},
-            {headerText: 'MakeFlag', key: 'MakeFlag', dataType: 'string', width: '25%'},
-        ],
-        features: [{
-                name: 'Updating',
-                enableAddRow: false,
-                enableDeleteRow: false,
-                editMode: 'none'
-            },
-            {
-                name: 'Paging',
-                type: 'local',
-                pageSize: 50
-            },
-            {
-                name: 'Filtering'
-            }
-        ]}">
+        columns: columns,
+        features: features
+    }">
     </table>
 
     <!-- jQuery -->
@@ -51,7 +33,7 @@
     <script src="./igniteui/js/infragistics.core.js"></script>
     <script src="./igniteui/js/infragistics.dv.js"></script>
     <script src="./igniteui/js/infragistics.lob.js"></script>
-    
+
     <!-- knockout -->
     <script src="./js/knockout.js"></script>
 
@@ -63,11 +45,60 @@
     <!-- data -->
     <script src="https://igniteui.github.io/help-samples/data-files/adventureworks.min.js"></script>
     <script>
-        $(function(){
-            var viewModel = function() {
+        $(function () {
+            const columns = [{
+                    headerText: 'ProductID',
+                    key: 'ProductID',
+                    dataType: 'string'
+                },
+                {
+                    headerText: 'Product Data',
+                    key: 'ProductData',
+                    group: [
+                        {
+                            headerText: 'Name',
+                            key: 'Name',
+                            dataType: 'string'
+                        },
+                        {
+                            headerText: 'ProductNumber',
+                            key: 'ProductNumber',
+                            dataType: 'string'
+                        }
+                    ]
+                }
+            ];
+
+            const features = [{
+                    name: 'Updating',
+                    enableAddRow: true,
+                    enableDeleteRow: true,
+                    editMode: 'row'
+                },
+                {
+                    name: 'Paging',
+                    type: 'local',
+                    pageSize: 50
+                },
+                {
+                    name: 'Filtering'
+                },
+                {
+                    name: "RowSelectors"
+                },
+                {
+                    name: "Selection"
+                },
+                {
+                    name: "MultiColumnHeaders"
+                }
+            ];
+
+            var viewModel = function () {
                 const self = this;
                 self.items = ko.observableArray([...adventureWorks]);
-
+                self.columns = columns;
+                self.features = features;
             }
 
             ko.applyBindings(viewModel);
