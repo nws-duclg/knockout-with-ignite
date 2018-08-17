@@ -8,11 +8,40 @@
     <title>Document</title>
     <link rel="stylesheet" href="./igniteui/css/themes/infragistics/infragistics.theme.css">
     <link rel="stylesheet" href="./igniteui/css/structure/infragistics.css">
+
 </head>
 
 <body>
 
-    <table id="grid"></table>
+    <table id="grid" data-bind="igGrid: {
+        width: '100%',
+        autoGenerateColumns: false,
+        renderCheckboxes: true,
+        dataSource: items,
+        primaryKey: 'ProductID',
+        height : '300px',
+        columns: [
+            {headerText: 'ProductID', key: 'ProductID', dataType: 'string', width: '25%'},
+            {headerText: 'Name', key: 'Name', dataType: 'string', width: '25%'},
+            {headerText: 'ProductNumber', key: 'ProductNumber', dataType: 'string', width: '25%'},
+            {headerText: 'MakeFlag', key: 'MakeFlag', dataType: 'string', width: '25%'},
+        ],
+        features: [{
+                name: 'Updating',
+                enableAddRow: false,
+                enableDeleteRow: false,
+                editMode: 'none'
+            },
+            {
+                name: 'Paging',
+                type: 'local',
+                pageSize: 50
+            },
+            {
+                name: 'Filtering'
+            }
+        ]}">
+    </table>
 
     <!-- jQuery -->
     <script src="./js/jquery.min.js"></script>
@@ -22,117 +51,27 @@
     <script src="./igniteui/js/infragistics.core.js"></script>
     <script src="./igniteui/js/infragistics.dv.js"></script>
     <script src="./igniteui/js/infragistics.lob.js"></script>
+    
+    <!-- knockout -->
+    <script src="./js/knockout.js"></script>
+
+    <!-- ignite with knockout -->
+    <script src="./igniteui/js/extensions/infragistics.datasource.knockoutjs.js"></script>
+    <script src="./igniteui/js/extensions/infragistics.ui.grid.knockout-extensions.js"></script>
+
 
     <!-- data -->
     <script src="https://igniteui.github.io/help-samples/data-files/adventureworks.min.js"></script>
     <script>
-        // TODO script go here
-        const columns = [{
-                headerText: "Product ID",
-                key: "ProductID",
-                dataType: "number",
-                width: "15%"
-            },
-            {
-                headerText: "Product Name",
-                key: "Name",
-                dataType: "string",
-                width: "40%"
-            },
-            {
-                headerText: "Product Number",
-                key: "ProductNumber",
-                dataType: "string",
-                width: "30%"
-            },
-            {
-                headerText: "Make Flag",
-                key: "MakeFlag",
-                dataType: "bool",
-                width: "15%"
+        $(function(){
+            var viewModel = function() {
+                const self = this;
+                self.items = ko.observableArray([...adventureWorks]);
+
             }
-        ];
 
-        $("#grid").igGrid({
-            primaryKey: "ProductID",
-            autoGenerateColumns: false,
-            width: "100%",
-            caption: "Sales Data",
-            columns: columns,
-            dataSource: adventureWorks,
-            features: [{
-                    name: 'Paging',
-                    type: "local",
-                    pageSize: 10
-                },
-                {
-                    name: "Filtering",
-                    filterButtonLocation: "left",
-                    caseSensitive: false,
-                    type: "local", // "local" and "remote"
-                    filterDropDownItemIcons: true
-
-                },
-                {
-                    name: "RowSelectors",
-                    enableRowNumbering: false,
-                    enableCheckBoxes: true,
-                    enableSelectAllForPaging: true,
-                    deselectAllForPagingTemplate: "<div class='ui-widget-header ui-priority-secondary' tabindex='0'><div><a href='#' tabindex='0' data-rs-deselect-all>Deselect all ${totalRecordsCount} records</a><div style='float:right;'><span data-rs-close-all class='ui-icon-close ui-icon ui-button' tabindex='0'></div></span></div></div>"
-                },
-                {
-                    name: "Selection",
-                    multipleSelection: true
-                },
-                {
-                    name: "Updating",
-                    enableAddRow: true,
-                    editMode: "row",
-                    enableDeleteRow: true,
-                    columnSettings: [{
-                        columnKey: "ProductID",
-                        editorOptions: {
-                            type: "numeric",
-                            disabled: true
-                        }
-                    }, ]
-                }
-            ]
-        });
-
-        //cellClick
-        $("#grid").igGrid({
-            cellClick: function (evt, ui) {
-                console.log("cellClick");
-                const grid = $("#grid").igGrid("widget");
-                console.log(grid);
-
-                const count = $("#grid").igGrid("totalRecordsCount");
-                console.log(count);
-
-            },
-            cellRightClick: function (evt, ui) {
-                console.log("cellRightClick");
-            },
-            dataBinding: function (evt, ui) {
-                console.log("dataBinding");
-            },
-            dataBound: function (evt, ui) {
-                console.log("dataBound");
-            },
-            dataRendering: function (evt, ui) {
-                console.log("dataRendering");
-            },
-            dataRendered: function (evt, ui) {
-                console.log("dataRendered");
-            },
-            rowsRendered: function (evt, ui) {
-                console.log("rowsRendered");
-            },
-            rendering: function (evt, ui) {
-                console.log("rendering");
-            },
-        });
+            ko.applyBindings(viewModel);
+        })
     </script>
 </body>
 
