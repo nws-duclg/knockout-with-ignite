@@ -51,9 +51,9 @@
                             dataType: "string"
                         },
                         {
-                            headerText: "Product Number",
-                            key: "ProductNumber",
-                            dataType: "string"
+                            headerText: "Make Flag",
+                            key: "MakeFlag",
+                            dataType: "bool"
                         }
                     ]
                 }
@@ -62,6 +62,7 @@
             $("#grid").igGrid({
                 width: "600px",
                 height: "600px",
+                renderCheckboxes: true,
                 columns: columns,
                 primaryKey : "ProductID",
                 dataSource: adventureWorks,
