@@ -12,9 +12,9 @@ const columns = [{
                 dataType: 'string'
             },
             {
-                headerText: 'ProductNumber',
-                key: 'ProductNumber',
-                dataType: 'string'
+                headerText: 'Make Flag',
+                key: 'MakeFlag',
+                dataType: 'bool'
             }
         ]
     }
