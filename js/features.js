@@ -1,8 +1,11 @@
 const features = [{
         name: 'Updating',
-        enableAddRow: true,
-        enableDeleteRow: true,
-        editMode: 'row'
+        editMode: 'row',
+        editCellEnded: editCellEnded,
+        editRowEnded: editRowEnded,
+        columnSettings: [
+            { columnKey: 'ProductID', editorOptions: { type: 'numeric', disabled: true} },
+        ]
     },
     {
         name: 'Paging',

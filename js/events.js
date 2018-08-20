@@ -127,3 +127,90 @@ function schemaGenerated(evt, ui) {
     //return reference to data source
     console.log("schemaGenerated", ui.dataSource);
 }
+
+
+/**
+ * Events
+ * ui.igGridUpdating
+ * 
+ * dataDirty
+ * editCellEnded
+ * editCellEnding
+ * editCellStarted
+ * editCellStarting
+ * editRowEnded
+ * editRowEnding
+ * editRowStarted
+ * editRowStarting
+ * generatePrimaryKeyValue
+ * rowAdded
+ * rowAdding
+ * rowDeleted
+ * rowDeleting
+ * rowEditDialogAfterClose
+ * rowEditDialogAfterOpen
+ * rowEditDialogBeforeClose
+ * rowEditDialogBeforeOpen
+ * rowEditDialogContentsRendered
+ */
+
+function editCellEnded(evt, ui) {
+    if (ui.update) {
+        //return the triggered event
+        console.log("editCellEnded evt", evt);
+
+        // get reference to igGridUpdating widget
+        console.log("editCellEnded ui.owner", ui.owner);
+
+        // to get key or index of row
+        console.log("editCellEnded ui.rowID", ui.rowID);
+
+        // get index of column
+        console.log("editCellEnded ui.columnIndex", ui.columnIndex);
+
+        // get key of column
+        console.log("editCellEnded ui.columnKey", ui.columnKey);
+
+        // get reference to igEditor
+        console.log("editCellEnded ui.editor", ui.editor);
+
+        // get value of cell
+        console.log("editCellEnded ui.value", ui.value);
+        alert(ui.value);
+
+        // get old value of cell
+        console.log("editCellEnded ui.oldValue", ui.oldValue);
+
+        // check if cell was modified and data source will be updated
+        console.log("editCellEnded ui.update", ui.update);
+    }
+
+}
+
+function editRowEnded(evt, ui) {
+    // if (ui.update) {
+    //     //return the triggered event
+    //     console.log("editRowEnded evt", evt);
+
+    //     // get reference to igGridUpdating widget
+    //     console.log("editRowEnded ui.owner", ui.owner);
+
+    //     // to get key or index of row
+    //     console.log("editRowEnded ui.rowID", ui.rowID);
+
+    //     // check if cell was modified and data source will be updated
+    //     console.log("editRowEnded ui.update", ui.update);
+
+    //     // get value of cell in column with the key
+    //     const values = JSON.stringify(ui.values);
+    //     console.log("editRowEnded ui.values", ui.values);
+    //     alert(values);
+
+    //     // to get old value of cell in column with the key
+    //     console.log("editRowEnded ui.oldValues", ui.oldValues);
+
+    //     // check if that event is raised while new-row-adding
+    //     console.log("editRowEnded ui.rowAdding", ui.rowAdding);
+    // }
+
+}
