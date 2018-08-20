@@ -14,14 +14,16 @@
 <body>
 
     <table id="grid" data-bind="igGrid: {
-        width: '100%',
-        height : '600px',
+        width: '900px',
         autoGenerateColumns: false,
         dataSource: items,
         autoCommit: true,
         primaryKey: 'ProductID',
-        columns: columns,
-        features: features
+        columns,
+        features,
+        rowsRendered,
+        rowsRendering,
+        schemaGenerated
     }">
     </table>
 
@@ -54,8 +56,7 @@
                 {
                     headerText: 'Product Data',
                     key: 'ProductData',
-                    group: [
-                        {
+                    group: [{
                             headerText: 'Name',
                             key: 'Name',
                             dataType: 'string'
@@ -94,11 +95,44 @@
                 }
             ];
 
+            function rowsRendered(evt, ui) {
+                //return reference to igGrid
+                console.log("rowsRendered", ui.owner);
+
+                //return grid's table body DOM element
+                console.log("rowsRendered", ui.tbody);
+
+            }
+
+            function rowsRendering(evt, ui) {
+                //return reference to igGrid
+                console.log("rowsRendering", ui.owner);
+
+                //return grid's table body
+                console.log("rowsRendering", ui.tbody);
+
+            }
+
+            function schemaGenerated(evt, ui) {
+                //return reference to igGrid
+                console.log("schemaGenerated", ui.owner);
+
+                //return data source schema
+                console.log("schemaGenerated", ui.schema);
+
+                //return reference to data source
+                console.log("schemaGenerated", ui.dataSource);
+
+            }
+
             var viewModel = function () {
                 const self = this;
                 self.items = ko.observableArray([...adventureWorks]);
                 self.columns = columns;
                 self.features = features;
+                self.rowsRendering = rowsRendering;
+                self.schemaGenerated = schemaGenerated;
+                self.rowsRendered = rowsRendered;
             }
 
             ko.applyBindings(viewModel);
