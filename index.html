@@ -21,6 +21,19 @@
         primaryKey: 'ProductID',
         columns,
         features,
+        cellClick,
+        cellRightClick,
+        columnsCollectionModified,
+        dataBinding,
+        dataBound,
+        dataRendered,
+        dataRendering,
+        footerRendered,
+        footerRendering,
+        headerCellRendered,
+        headerRendered,
+        headerRendering,
+        rendered,
         rendering,
         rowsRendered,
         rowsRendering,
@@ -47,100 +60,35 @@
 
     <!-- data -->
     <script src="https://igniteui.github.io/help-samples/data-files/adventureworks.min.js"></script>
+
+    <script src="./js/columns.js"></script>
+    <script src="./js/features.js"></script>
+    <script src="./js/events.js"></script>
     <script>
         $(function () {
-            const columns = [{
-                    headerText: 'ProductID',
-                    key: 'ProductID',
-                    dataType: 'string'
-                },
-                {
-                    headerText: 'Product Data',
-                    key: 'ProductData',
-                    group: [{
-                            headerText: 'Name',
-                            key: 'Name',
-                            dataType: 'string'
-                        },
-                        {
-                            headerText: 'ProductNumber',
-                            key: 'ProductNumber',
-                            dataType: 'string'
-                        }
-                    ]
-                }
-            ];
-
-            const features = [{
-                    name: 'Updating',
-                    enableAddRow: true,
-                    enableDeleteRow: true,
-                    editMode: 'row'
-                },
-                {
-                    name: 'Paging',
-                    type: 'local',
-                    pageSize: 50
-                },
-                {
-                    name: 'Filtering'
-                },
-                {
-                    name: "RowSelectors"
-                },
-                {
-                    name: "Selection"
-                },
-                {
-                    name: "MultiColumnHeaders"
-                }
-            ];
-
-            function rendering(evt, ui) {
-                //return reference to igGrid
-                console.log("rendering", ui.owner);
-                
-            }
-
-            function rowsRendered(evt, ui) {
-                //return reference to igGrid
-                console.log("rowsRendered", ui.owner);
-
-                //return grid's table body DOM element
-                console.log("rowsRendered", ui.tbody);
-
-            }
-
-            function rowsRendering(evt, ui) {
-                //return reference to igGrid
-                console.log("rowsRendering", ui.owner);
-
-                //return grid's table body
-                console.log("rowsRendering", ui.tbody);
-
-            }
-
-            function schemaGenerated(evt, ui) {
-                //return reference to igGrid
-                console.log("schemaGenerated", ui.owner);
-
-                //return data source schema
-                console.log("schemaGenerated", ui.schema);
-
-                //return reference to data source
-                console.log("schemaGenerated", ui.dataSource);
-
-            }
-
+          
             var viewModel = function () {
                 const self = this;
                 self.items = ko.observableArray([...adventureWorks]);
                 self.columns = columns;
                 self.features = features;
+                self.cellClick = cellClick;
+                self.cellRightClick = cellRightClick;
+                self.columnsCollectionModified = columnsCollectionModified;
+                self.dataBinding = dataBinding;
+                self.dataBound = dataBound;
+                self.dataRendered = dataRendered;
+                self.dataRendering = dataRendering;
+                self.footerRendered = footerRendered;
+                self.footerRendering = footerRendering;
+                self.headerCellRendered = headerCellRendered;
+                self.headerRendered = headerRendered;
+                self.headerRendering = headerRendering;
+                self.rendered = rendered;
+                self.rendering = rendering;
+                self.rowsRendered = rowsRendered;
                 self.rowsRendering = rowsRendering;
                 self.schemaGenerated = schemaGenerated;
-                self.rowsRendered = rowsRendered;
-                self.rendering = rendering;
             }
 
             ko.applyBindings(viewModel);
